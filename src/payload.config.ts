@@ -1,15 +1,17 @@
 import { buildConfig } from "payload/config";
 import path from "path";
 
-import Examples from "./collections/Examples";
-import Users from "./collections/Users";
+import Admins from "./collections/Admins";
+import CourierUsers from "./collections/CourierUsers";
+import GovUsers from "./collections/GovUsers";
+import Orders from "./collections/Orders";
 
 export default buildConfig({
-  serverURL: "http://localhost:3000",
+  serverURL: process.env.SERVER_URL,
   admin: {
-    user: Users.slug,
+    user: Admins.slug,
   },
-  collections: [Users, Examples],
+  collections: [Admins, CourierUsers, GovUsers, Orders],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
