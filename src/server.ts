@@ -1,5 +1,6 @@
 import express from "express";
 import payload from "payload";
+import { router } from "./routes";
 
 require("dotenv").config();
 
@@ -19,6 +20,9 @@ const start = async () => {
     },
   });
 
+  router.use(payload.authenticate);
+
+  app.use(router);
   app.listen(process.env.PORT);
 };
 
