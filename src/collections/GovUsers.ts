@@ -8,8 +8,15 @@ const GovUsers: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: () => true,
   },
-  fields: [],
+  fields: [
+    {
+      name: "phone",
+      label: "Номер телефона",
+      type: "text",
+    },
+  ],
 };
 
 export default GovUsers;

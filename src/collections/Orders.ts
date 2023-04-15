@@ -1,4 +1,5 @@
 import { CollectionConfig } from "payload/types";
+
 import { serviceOptions } from "./CourierUsers";
 
 const statusOptions = [
@@ -7,8 +8,12 @@ const statusOptions = [
     value: "stale",
   },
   {
-    label: "Доставляется",
-    value: "progress",
+    label: "Выбрано курьером",
+    value: "courierSelected",
+  },
+  {
+    label: "Курьер забрал посылку",
+    value: "courierPickedUp",
   },
   {
     label: "Доставлено",
@@ -22,6 +27,7 @@ const Orders: CollectionConfig = {
     useAsTitle: "id",
     defaultColumns: [
       "id",
+      "phone",
       "fullName",
       "fullDependantName",
       "fullAddress",
@@ -41,6 +47,11 @@ const Orders: CollectionConfig = {
     {
       name: "id",
       label: "ID услуги",
+      type: "text",
+    },
+    {
+      name: "phone",
+      label: "Номер телефона",
       type: "text",
     },
     {

@@ -23,10 +23,17 @@ const CourierUsers: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: () => true,
   },
   fields: [
     {
+      name: "phone",
+      label: "Номер телефона",
+      type: "text",
+    },
+    {
       name: "service",
+      label: "Сервис доставки",
       type: "radio",
       options: serviceOptions,
     },

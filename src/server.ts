@@ -1,5 +1,6 @@
 import express from "express";
 import payload from "payload";
+
 import { router } from "./routes";
 
 require("dotenv").config();
