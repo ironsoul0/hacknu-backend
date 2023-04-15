@@ -1,10 +1,12 @@
 import express from "express";
 import payload from "payload";
 import { router } from "./routes";
+var cors = require('cors')
 
 require("dotenv").config();
 
 const app = express();
+app.use(cors())
 
 app.get("/", (_, res) => {
   res.redirect("/admin");
