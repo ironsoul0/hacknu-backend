@@ -1,0 +1,22 @@
+import { CollectionConfig } from "payload/types";
+
+const Users: CollectionConfig = {
+  slug: "users",
+  auth: true,
+  admin: {
+    useAsTitle: "email",
+  },
+  access: {
+    read: () => true,
+  },
+  fields: [
+    {
+      name: "role",
+      type: "select",
+      required: true,
+      options: ["gov", "courier", "admin", "developer"],
+    },
+  ],
+};
+
+export default Users;
