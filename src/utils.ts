@@ -21,24 +21,28 @@ export const getUser = (req: Request): User | null => {
 };
 
 export const sendSms = async (text: string, phone: string) => {
-  const {
-    data: { access_token: token },
-  } = await axios.post(
-    TokenDetails.url,
-    new URLSearchParams(TokenDetails.formData)
-  );
+  try {
+    const {
+      data: { access_token: token },
+    } = await axios.post(
+      TokenDetails.url,
+      new URLSearchParams(TokenDetails.formData)
+    );
 
-  await axios.post(
-    TokenDetails.smsUrl,
-    {
-      phone,
-      smsText: text,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    await axios.post(
+      TokenDetails.smsUrl,
+      {
+        phone,
+        smsText: text,
       },
-    }
-  );
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (err) {
+    console.log("Failed to send SMS", err, text, phone);
+  }
 };

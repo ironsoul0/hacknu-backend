@@ -196,6 +196,19 @@ router.post("/api/complete-delivery", async (req, res) => {
 });
 
 router.post("/api/create-order", async (req, res) => {
+  const orderDocs = await payload.find({
+    where: {
+      id: { equals: req.body.id },
+    },
+    collection: Collections.ORDERS,
+  });
+
+  if (orderDocs.docs.length !== 0) {
+    return res.status(401).json({
+      message: "Order with this ID already exists",
+    });
+  }
+
   const user = await payload.create({
     collection: Collections.ORDERS,
     data: req.body,
