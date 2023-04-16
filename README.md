@@ -1,19 +1,18 @@
-# hacknu-cms
+# Delivery service backend
 
-This project was created using create-payload-app using the blank template.
+Это source-код для бэкенд-части решения задачи от eGov и Huawei.
 
-## How to Use
+### Разворачиваем локально
 
-`yarn dev` will start up your application and reload on any changes.
+```bash
+cd hacknu-backend
+docker-compose up
+```
 
-### Docker
+После выполнения этих команд, Вы сможете пройти в админ-панель по адресу `http://localhost:8080`.
 
-If you have docker and docker-compose installed, you can run `docker-compose up`
+### Demo
 
-To build the docker image, run `docker build -t my-tag .`
+CMS, которую мы используем позволяет эффективно управлять курьерами, работниками ЦОНа и всеми заявками на доставку.
 
-Ensure you are passing all needed environment variables when starting up your container via `--env-file` or setting them with your deployment.
-
-The 3 typical env vars will be `MONGODB_URI`, `PAYLOAD_SECRET`, and `PAYLOAD_CONFIG_PATH`
-
-`docker run --env-file .env -p 3000:3000 my-tag`
+<img src="./assets/screen.png" >
