@@ -195,4 +195,47 @@ router.post("/api/complete-delivery", async (req, res) => {
   res.json(result);
 });
 
+router.post("/api/reject-order", async (req, res) => {
+  const user = getUser(req);
+
+  if (!user || user.collection !== Collections.COURIER_USERS) {
+    return res.status(401).json({
+      message: "Unauthorized request",
+    });
+  }
+
+  const { orderId } = req.body;
+
+  const orderDocs = await payload.find({
+    where: {
+      id: { equals: orderId },
+    },
+    collection: Collections.ORDERS,
+  });
+
+  if (
+    !orderDocs.docs.length ||
+    (orderDocs.docs[0].status !== OrderStatus.COURIER_PICKED_UP &&
+      orderDocs.docs[0].status !== OrderStatus.COURIER_SELECTED)
+  ) {
+    return res.status(401).json({
+      message: "Invalid order ID or OTP was sent",
+    });
+  }
+
+  const order = orderDocs.docs[0];
+  const result = await payload.update({
+    collection: Collections.ORDERS,
+    id: orderId,
+    data: {
+      status: OrderStatus.STALE,
+      attachedCourier: "",
+    },
+  });
+
+  await sendSms(Messages.COURIER_CHANGED, order.phone);
+
+  res.json(result);
+});
+
 export { router };
