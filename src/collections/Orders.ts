@@ -42,6 +42,7 @@ const Orders: CollectionConfig = {
     create: () => true,
     read: () => true,
     update: () => true,
+    delete: () => true,
   },
   fields: [
     {

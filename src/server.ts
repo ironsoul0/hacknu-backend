@@ -3,6 +3,7 @@ import payload from "payload";
 import cors from "cors";
 
 import { router } from "./routes";
+import { router as orderRouter } from "./routes/order";
 
 require("dotenv").config();
 
@@ -27,6 +28,8 @@ const start = async () => {
   router.use(payload.authenticate);
 
   app.use(router);
+  app.use(orderRouter);
+
   app.listen(process.env.PORT);
 };
 
